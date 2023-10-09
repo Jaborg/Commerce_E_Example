@@ -37,3 +37,17 @@ services:
       - ./initialize-airflow.sh:/entrypoint.sh
     entrypoint: ["/bin/bash", "/entrypoint.sh"]
     command: scheduler
+
+  postgres:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: Jaborg1258
+      POSTGRES_PASSWORD: Sains1258
+      POSTGRES_DB: ConsumeDB
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:
