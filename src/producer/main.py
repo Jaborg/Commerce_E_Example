@@ -8,7 +8,7 @@ from produce_utils import Sales_Event,delivery_report
 
 if __name__ == "__main__": 
     conf = {
-    'bootstrap.servers': 'localhost:9092',  # Assuming your Kafka broker is running locally
+    'bootstrap.servers': 'kafka:9092',  # Assuming your Kafka broker is running locally
     'client.id': 'python-producer'
 }
     producer = Producer(conf)

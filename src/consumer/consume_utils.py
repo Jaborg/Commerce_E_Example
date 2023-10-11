@@ -1,6 +1,6 @@
 
 conf = {
-    'bootstrap.servers': 'localhost:9092',  # e.g. 'localhost:9092' or 'kafka:9093'
+    'bootstrap.servers': 'kafka:9092',  # e.g. 'localhost:9092' or 'kafka:9093'
     'group.id': 'sales_group',
     'auto.offset.reset': 'earliest'
 }

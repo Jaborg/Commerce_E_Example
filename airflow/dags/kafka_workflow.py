@@ -15,22 +15,25 @@ dag = DAG(
     'kafka_workflow',
     default_args=default_args,
     description='A simple Kafka producer-consumer workflow',
-    schedule_interval=timedelta(minutes=30),
-    start_date=datetime(2023, 10, 9),
+    schedule_interval=timedelta(minutes=1),
+    start_date=datetime(2023, 10, 10),
     catchup=False,
 )
 
 # Assume producer.py and consumer.py are in the ~/airflow/dags/ folder or provide the full path
+
+
 produce_task = BashOperator(
     task_id='produce_to_kafka',
-    bash_command='python3 producer.py',
+    bash_command='python3 /opt/airflow/producer/main.py',
     dag=dag,
 )
 
 consume_task = BashOperator(
     task_id='consume_from_kafka',
-    bash_command='python3 consumer.py',
+    bash_command='python3 /opt/airflow/consumer/main.py',
     dag=dag,
 )
 
 produce_task >> consume_task
+
