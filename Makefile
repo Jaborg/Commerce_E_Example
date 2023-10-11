@@ -10,3 +10,5 @@ clean_env:
 containers:
 	docker-compose up -d
 
+down:
+	docker-compose down           

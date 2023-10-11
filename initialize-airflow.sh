@@ -9,6 +9,15 @@ if [ ! -f "/airflow/airflow-init-complete.marker" ]; then
     touch /airflow/airflow-init-complete.marker
 fi
 
+# Create Airflow user
+airflow users create \
+    --username admin \
+    --password admin \
+    --firstname John \
+    --lastname Doe \
+    --role Admin \
+    --email admin@example.com
+
 # Start the web server in the foreground
 exec airflow webserver
 
