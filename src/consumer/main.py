@@ -24,7 +24,9 @@ if __name__ == "__main__":
         else:
 
             event_data = json.loads(msg.value().decode('utf-8').replace("'", "\""))
+            store_data_in_db(event_data)
             print(event_data)
+            
 
 
             

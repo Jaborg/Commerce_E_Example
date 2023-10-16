@@ -1,3 +1,4 @@
+import utils.database_functions 
 
 conf = {
     'bootstrap.servers': 'kafka:9092',  # e.g. 'localhost:9092' or 'kafka:9093'
@@ -5,18 +6,12 @@ conf = {
     'auto.offset.reset': 'earliest'
 }
 
+#{'product_id': 2, 'product_name': 'mouse', 'quantity': 10, 'price': 31, 'timestamp': '2023-10-11 19:14:05'}
 
-def process_message(msg_value):
-    # Extract data from your message. This assumes a simple string; adjust if your message is JSON, etc.
-    data = msg_value.split(',')
-    product_id, quantity, price = data[0], data[1], data[2]
-    # Calculate total sales amount
-    total_sales = int(quantity) * float(price)
+
+def store_data_in_db(data):
+
+    utils.database_functions.sql_execute(data,'insert')
     
-    # Return processed data
-    return product_id, total_sales
-
-def store_data_in_db(product_id, total_sales):
-    # Connect to your database (e.g., PostgreSQL) and store the data. 
-    # This is just a placeholder function; you'll need to implement database connection and insertion logic.
     pass
+
