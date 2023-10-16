@@ -1,22 +1,11 @@
-import psycopg2
+import psycopg2-binary
 
-connection = psycopg2.connect(
-    host="localhost",          # Change if your DB is on another machine
-    database="mydatabase",
-    user="myuser",
-    password="mypassword"
-)
-cursor = connection.cursor()
 
-# Execute SQL queries using cursor as needed.
-
-cursor.close()
-connection.close()
 
 config = {'host':"localhost",          # Change if your DB is on another machine
-    'database':"mydatabase",
-    'user':"myuser",
-    'password':"mypassword"}
+    'database':"ConsumeDB",
+    'user':"Jaborg1258",
+    'password':"Sains1258"}
 
 
 def sql_connect(config):
@@ -29,5 +18,14 @@ def sql_connect(config):
 )
     cursor = connection.cursor()
 
+    return cursor
 
-de
+
+def sql_execute(sql,type)
+
+    cursor = sql_connect(config)
+    if type == 'insert':
+        cursor.execute(sql.read_file('.sql_scripts/insert_main.sql'),sql)
+
+
+    return

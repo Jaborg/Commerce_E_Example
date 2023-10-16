@@ -1,7 +1,7 @@
 setup:
 	 python3.11 -m venv env
 	 env/bin/python3.11 -m pip install --upgrade pip
-	 env/bin/pip3.11 install -r requirements.txt
+	 env/bin/pip3.11 install -r requirement.txt
 
 
 clean_env:
