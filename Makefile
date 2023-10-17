@@ -1,7 +1,7 @@
 setup:
 	 python3.11 -m venv env
-	 env/bin/python3.11 -m pip install --upgrade pip
-	 env/bin/pip3.11 install -r requirement.txt
+	 env/bin/python3.11 -m pip install --upgrade pip --no-user
+	 env/bin/pip3.11 install -r requirement.txt --no-user
 
 
 clean_env:
@@ -16,5 +16,5 @@ down:
 produce-to-kafka:
 	env/bin/python -m utils.cli_parser --command produce
 
-consume_from-kafka:
+consume-from-kafka:
 	env/bin/python -m utils.cli_parser --command consume
