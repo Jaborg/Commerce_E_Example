@@ -1,5 +1,4 @@
-import psycopg2-binary
-
+import psycopg2
 
 
 config = {'host':"localhost",          # Change if your DB is on another machine
@@ -21,7 +20,7 @@ def sql_connect(config):
     return cursor
 
 
-def sql_execute(sql,type)
+def sql_execute(sql,type):
 
     cursor = sql_connect(config)
     if type == 'insert':

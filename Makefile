@@ -11,4 +11,10 @@ containers:
 	docker-compose up -d
 
 down:
-	docker-compose down           
+	docker-compose down
+
+produce-to-kafka:
+	env/bin/python -m utils.cli_parser --command produce
+
+consume_from-kafka:
+	env/bin/python -m utils.cli_parser --command consume

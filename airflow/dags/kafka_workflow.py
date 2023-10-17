@@ -25,13 +25,13 @@ dag = DAG(
 
 produce_task = BashOperator(
     task_id='produce_to_kafka',
-    bash_command='python3 /opt/airflow/producer/main.py',
+    bash_command='make produce-to-kafka',
     dag=dag,
 )
 
 consume_task = BashOperator(
     task_id='consume_from_kafka',
-    bash_command='python3 /opt/airflow/consumer/main.py',
+    bash_command='make consume-from-kafka',
     dag=dag,
 )
 
