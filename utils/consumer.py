@@ -2,28 +2,12 @@ from confluent_kafka import Consumer, KafkaError
 import json
 
 import utils.database_functions as dbf
-
-conf = {
-    'bootstrap.servers': 'kafka:9092',  # e.g. 'localhost:9092' or 'kafka:9093'
-    'group.id': 'sales_group',
-    'auto.offset.reset': 'earliest'
-}
-
-
-
-
-
-# def store_data_in_db(data):
-
-#     dbf.sql_execute(data,'insert')
-    
-#     pass
-
+from utils.constants import kafka_consume_conf,postgres_config
 
 
 def consume_from_kafka():
     
-    consumer = Consumer(conf)
+    consumer = Consumer(kafka_consume_conf)
     consumer.subscribe(['sales'])
 
     for x in range(100):
@@ -40,6 +24,6 @@ def consume_from_kafka():
         else:
 
             event_data = json.loads(msg.value().decode('utf-8').replace("'", "\""))
-            # store_data_in_db(event_data)
+            dbf.store_data_in_db(postgres_config,event_data)
             print(event_data)
         

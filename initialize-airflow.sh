@@ -20,4 +20,6 @@ airflow users create \
 
 # Start the web server in the foreground
 exec airflow webserver
+exec airflow scheduler
+
 

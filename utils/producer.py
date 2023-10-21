@@ -5,10 +5,7 @@ import time
 from datetime import datetime
 
 
-conf = {
-    'bootstrap.servers': 'kafka:9092',  
-    'client.id': 'python-producer'
-}
+from utils.constants import kafka_produce_conf
 
 class Sales_Event:
 
@@ -35,7 +32,7 @@ def delivery_report(err, msg):
 def produce_to_kafka():
 
 
-    producer = Producer(conf)
+    producer = Producer(kafka_produce_conf)
 
 
 
