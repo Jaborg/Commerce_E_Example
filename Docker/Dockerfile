@@ -1,11 +1,27 @@
-# Use the official Airflow image as the base
-FROM apache/airflow:latest
+FROM apache/airflow:2.6.2-python3.11
 
-# The working directory in the base image is /opt/airflow
 WORKDIR /opt/airflow
 
-# Copy your requirements file into the container
-COPY ./requirement.txt .
+ENV DEBIAN_FRONTEND=noninteractive
 
-# Use pip to install the dependencies
+USER root
+
+RUN apt-get update && \
+    apt-get install -y make gcc && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
+USER airflow
+
+COPY ./requirement.txt .
+COPY ./Makefile .
+COPY ./sql_scripts ./sql_scripts
+
+
+
 RUN pip install --no-cache-dir -r requirement.txt
+RUN make setup
+
+
+
+

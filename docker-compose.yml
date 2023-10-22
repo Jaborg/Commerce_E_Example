@@ -28,8 +28,8 @@ services:
     volumes:
       - ./initialize-airflow.sh:/entrypoint.sh
       - ./airflow/dags:/opt/airflow/dags
-      - ./src/consumer/:/opt/airflow/consumer/
-      - ./src/producer/:/opt/airflow/producer/
+      - ./utils:/opt/airflow/utils/
+      - ./Makefile:/opt/airflow/Makefile
     entrypoint: ["/bin/bash", "/entrypoint.sh"]
     environment:
       - LOAD_EX=y
@@ -58,6 +58,7 @@ services:
       - "5432:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data
+      - ./sql_scripts/init.sql:/docker-entrypoint-initdb.d/init.sql
 
 volumes:
   pgdata:

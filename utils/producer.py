@@ -1,6 +1,11 @@
+from confluent_kafka import Producer
+import json
 import random
 import time
 from datetime import datetime
+
+
+from utils.constants import kafka_produce_conf
 
 class Sales_Event:
 
@@ -20,3 +25,22 @@ def delivery_report(err, msg):
         print('Message delivery failed: {}'.format(err))
     else:
         print('Message delivered to {} [{}]'.format(msg.topic(), msg.partition()))
+
+
+
+
+def produce_to_kafka():
+
+
+    producer = Producer(kafka_produce_conf)
+
+
+
+    for _ in range(100):  # Produce 100 sales events
+        event = Sales_Event()
+        serialized_event = json.dumps(vars(event))
+        producer.produce('sales', key=str(event.product_id), value=serialized_event, callback=delivery_report)
+
+        # Wait for any outstanding messages to be delivered and delivery reports to be received.
+        producer.poll(0)
+    producer.flush()

@@ -1,16 +1,16 @@
 from confluent_kafka import Consumer, KafkaError
 import json
 
-from consume_utils import store_data_in_db,process_message,conf
+import utils.database_functions as dbf
+from utils.constants import kafka_consume_conf,postgres_config
 
 
-if __name__ == "__main__": 
-
+def consume_from_kafka():
     
-    consumer = Consumer(conf)
+    consumer = Consumer(kafka_consume_conf)
     consumer.subscribe(['sales'])
 
-    while True:
+    for x in range(100):
         msg = consumer.poll(1.0)
 
         if msg is None:
@@ -24,9 +24,6 @@ if __name__ == "__main__":
         else:
 
             event_data = json.loads(msg.value().decode('utf-8').replace("'", "\""))
+            dbf.store_data_in_db(postgres_config,event_data)
             print(event_data)
-
-
-            
-            # Store processed data
-            # store_data_in_db(product_id, total_sales)
+        
